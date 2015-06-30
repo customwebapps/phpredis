@@ -1904,7 +1904,8 @@ PHPAPI int redis_mbulk_reply_assoc(INTERNAL_FUNCTION_PARAMETERS, RedisSock *redi
     } else {
         ZVAL_DUP(return_value, &z_multi_result);
         zval_dtor(&z_multi_result);
-        efree(&z_multi_result);
+	// not dynamically allocated
+        //efree(&z_multi_result);
     }
     return 0;
 }
