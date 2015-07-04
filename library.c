@@ -1272,13 +1272,15 @@ static void array_zip_values_and_scores(RedisSock *redis_sock, zval *z_tab,
 
         /* Decode the score depending on flag */
         if (decode == SCORE_DECODE_INT && Z_STRLEN_P(z_data_p) > 0) {
+            // do we need to adjust hkey_len?
             add_assoc_long_ex(&z_ret, hkey, 1+hkey_len, atoi(hval+1));
         } else if (decode == SCORE_DECODE_DOUBLE) {
+            // do we need to adjust hkey_len?
             add_assoc_double_ex(&z_ret, hkey, 1+hkey_len, atof(hval));
         } else {
             zval z;
             ZVAL_DUP(&z, z_data_p);
-            add_assoc_zval_ex(&z_ret, hkey, 1+hkey_len, &z);
+            add_assoc_zval_ex(&z_ret, hkey, hkey_len, &z);
         }
     } ZEND_HASH_FOREACH_END();
 
