@@ -1605,7 +1605,7 @@ _**Description**_: Retrieve the values associated to the specified fields in the
 $redis->delete('h');
 $redis->hSet('h', 'field1', 'value1');
 $redis->hSet('h', 'field2', 'value2');
-$redis->hmGet('h', array('field1', 'field2')); /* returns array('field1' => 'value1', 'field2' => 'value2') */
+$redis->hMGet('h', array('field1', 'field2')); /* returns array('field1' => 'value1', 'field2' => 'value2') */
 ~~~
 
 ### hScan
