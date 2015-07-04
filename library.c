@@ -1891,7 +1891,8 @@ PHPAPI int redis_mbulk_reply_assoc(INTERNAL_FUNCTION_PARAMETERS, RedisSock *redi
                 efree(response);
                 add_assoc_zval_ex(&z_multi_result, Z_STRVAL_P(z_keys[i]), 1+Z_STRLEN_P(z_keys[i]), z);
             } else {
-                add_assoc_stringl_ex(&z_multi_result, Z_STRVAL_P(z_keys[i]), 1+Z_STRLEN_P(z_keys[i]), response, response_len);
+                // was +1 but that was now getting another \0 at the end of the key inside PHP
+                add_assoc_stringl_ex(&z_multi_result, Z_STRVAL_P(z_keys[i]), Z_STRLEN_P(z_keys[i]), response, response_len);
             }
         } else {
             add_assoc_bool_ex(&z_multi_result, Z_STRVAL_P(z_keys[i]), 1+Z_STRLEN_P(z_keys[i]), 0);
